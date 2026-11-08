@@ -9,7 +9,19 @@ Nhật kí sử dụng mạng xã hội 7 ngày (28/9 – 4/10/2026) cho khoản
 
 ## Biến môi trường trên Vercel
 
-`POSTGRES_URL`: chuỗi kết nối Postgres của Supabase (tích hợp Supabase trên Vercel tự thêm biến này).
+- `POSTGRES_URL`: chuỗi kết nối Postgres của Supabase (tích hợp Supabase trên Vercel tự thêm biến này).
+- `EXPORT_KEY`: mã để nhóm nghiên cứu tải file Excel. Tự đặt bằng `vercel env add EXPORT_KEY production`.
+
+## Deploy từ máy
+
+```
+git clone https://github.com/therealwolvesofwallstreet-ui/scroll-smart
+cd scroll-smart
+vercel link
+vercel integration add supabase --name scroll-smart-db
+vercel env add EXPORT_KEY production
+vercel --prod
+```
 
 ## Cách tính số liệu
 
@@ -20,7 +32,7 @@ Nhật kí sử dụng mạng xã hội 7 ngày (28/9 – 4/10/2026) cho khoản
 
 ## Xuất dữ liệu
 
-Cuối trang có mục "Dành cho nhóm nghiên cứu". Mã xuất dữ liệu nằm trong bảng `app_settings` (dòng `export_key`) trên Supabase.
+Cuối trang có mục "Dành cho nhóm nghiên cứu". Nhập mã `EXPORT_KEY` để tải file Excel. Nếu chưa đặt biến này thì mã nằm trong bảng `app_settings` (dòng `export_key`) trên Supabase.
 
 ## Xoá dữ liệu thử
 
