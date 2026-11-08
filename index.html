@@ -428,8 +428,8 @@ body.lock{overflow:hidden}
 'use strict';
 
 /* ======== cấu hình ======== */
-// URL ứng dụng web Apps Script (kết thúc bằng /exec)
-var API_URL = window.__API_URL__ || 'PASTE_APPS_SCRIPT_URL_HERE';
+// Địa chỉ API (Vercel serverless function)
+var API_URL = window.__API_URL__ || '/api/diary';
 
 var DAYS = ['2026-09-28','2026-09-29','2026-09-30','2026-10-01','2026-10-02','2026-10-03','2026-10-04'];
 var PURPOSES = ['Giải trí','Học tập','Nhắn tin/liên lạc','Xem tin tức','Giết thời gian','Khác'];
@@ -459,7 +459,7 @@ function cssVar(n){ return getComputedStyle(document.documentElement).getPropert
 function toast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(function(){t.classList.remove('on');},2600); }
 
 /* ======== gọi máy chủ ======== */
-function configured(){ return API_URL && API_URL.indexOf('http')===0; }
+function configured(){ return !!API_URL; }
 function apiGet(params){
   if(!configured()) return Promise.reject(new Error('Chưa nối máy chủ.'));
   params.t = Date.now();
@@ -468,7 +468,7 @@ function apiGet(params){
 }
 function apiPost(body){
   if(!configured()) return Promise.reject(new Error('Chưa nối máy chủ.'));
-  return fetch(API_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(readJson);
+  return fetch(API_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(readJson);
 }
 function readJson(r){
   return r.text().then(function(t){

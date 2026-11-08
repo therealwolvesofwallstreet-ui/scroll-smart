@@ -1,0 +1,12 @@
+{
+  "name": "scroll-smart",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nhật kí sử dụng mạng xã hội 7 ngày (28/9 – 4/10/2026)",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "postgres": "^3.4.5"
+  }
+}
